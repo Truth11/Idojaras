@@ -7,6 +7,9 @@
 	</head>
 	<body>
 		<div class="container-fluid">
+		<br>
+		kontnt
+		<br>
 			<?php // include('views/layout/top.php'); ?>
 			<?php include('views/index.php'); ?>
 		</div>

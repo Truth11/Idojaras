@@ -1,6 +1,6 @@
 <?php
 //---------el haslejuk a bemeno parametereket eleje
-	/**/
+	/*Adat bázis védelem, hogy illetéktelenek ne tudjanak parancsokat bejuttatni*/
 	if (!empty($_POST)) {
 		foreach ($_POST as $post => $value) {
 			$_POST[$post] = addslashes($_POST[$post]);
@@ -29,7 +29,7 @@
 
 
 	if ($versio == 'dev') {
-		
+		// fejlesztés
 		$ip = 'localhost';
 		$dbuser = 'root';
 		$dbpass = '';
