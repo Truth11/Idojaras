@@ -1,5 +1,5 @@
 <?php
-//---------el haslejuk a bemeno parametereket eleje
+//---------el haslejuk a bemeno parametereket eleje------------//
 	/*Adat bázis védelem, hogy illetéktelenek ne tudjanak parancsokat bejuttatni*/
 	if (!empty($_POST)) {
 		foreach ($_POST as $post => $value) {
@@ -21,12 +21,10 @@
 			$_REQUEST[$key] = addslashes($_REQUEST[$key]);
 		}
 	}
-	//---------el haslejuk a bemeno parametereket vege
+//---------el haslejuk a bemeno parametereket vege------------//
 	
 	
 	$versio = 'dev';  // verzio kapcsolo
-
-
 
 	if ($versio == 'dev') {
 		// fejlesztés
