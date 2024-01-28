@@ -1,0 +1,37 @@
+	
+	
+ADATBÁZIS terv:::
+-countrys
+	-id
+	-countryname
+-city
+	-id
+	-cityname
+	-countryid
+-temp
+	-id
+	-temperature
+	-cityid
+	
+	
+ADATBÁNYÁSZ alg:::
+-config adatok
+-csatlakozás az időjárás api hoz
+-internetvesztés kezelése
+-adatbeolvasás
+	-megadni milyen időközönként
+-feldolgozás
+-adatok feltöltése db be
+-log file írása
+-elakadásmentesítő algoritmus
+
+
+KINÉZET:::
+-layoutizació
+-index oldal
+	-szűrők
+találati oldal
+	-szűrők toppon
+	-lekért adatok megjelenítése
+	-design
+- backend api állíthatósága

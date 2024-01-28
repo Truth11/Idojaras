@@ -47,7 +47,6 @@
 
 
 	$connect = mysqli_connect($ip, $dbuser, $dbpass, $db);
-
 	mysqli_query($connect, 'set names utf8');
 
 
@@ -55,7 +54,7 @@
 	$descr = "asdf asdfasdf sfasdfasdfsadf dfasdfasdff";
 	$keywords = "weather, rain, wind, temperature";
 
-	$self_url = 'http://127.0.0.1/webszerk_143/a_idojaras/Truth11.github.io';  // ??????????? ez jó????????
+	$self_url = 'http://127.0.0.1/webdev/Truth11.github.io/index.php';  // ??????????? ez jó????????
 	$domain = 'truth11.github.io';
 	$slogen = ' - Ultimate weather.';
 ?>
