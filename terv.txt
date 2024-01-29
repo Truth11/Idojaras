@@ -1,30 +1,43 @@
 	
+	Terv a feladathoz
+	- = nincs kész
+	+ = kész
+	
+	
 	
 ADATBÁZIS terv:::
--countrys
-	-id
-	-countryname
--city
-	-id
-	-cityname
-	-countryid
--temp
-	-id
-	-temperature
-	-cityid
++countrys
+	+id
+	+countryname
++city
+	+id
+	+cityname
+	+countryid
++temp
+	+id
+	+temperature
+	+cityid
+	+timestamp
 	
+BACKEND:::
+	- backend api állíthatósága
+		- adatbázis megjelenítése
+			- táblázat ban
+		- város cron intervallunm állíthatósága	
 	
-ADATBÁNYÁSZ alg:::
-+config adatok
-+csatlakozás az időjárás api hoz
--EXTRA internetvesztés kezelése
--adatbeolvasás
-	-megadni milyen időközönként
--feldolgozás
--adatok feltöltése db be
--log file írása
--elakadásmentesítő algoritmus
--biztonsági leállítás
+	ADATBÁNYÁSZ alg:::
+	+config adatok
+	+csatlakozás az időjárás api hoz
+	-EXTRA internetvesztés kezelése
+	-időjárás adatbegyűjté / elmentés 
+		-adatbeolvasás
+			+ manuális indítással
+			- autómatikus git actionel cron jobbal megadni milyen időközönként
+		+adat feldolgozás
+		+adatok feltöltése db be
+		-log fileok írása
+		-elakadásmentesítő algoritmus
+		-biztonsági leállítás
 
 
 KINÉZET:::
@@ -33,11 +46,33 @@ KINÉZET:::
 	-szűrők
 találati oldal
 	-szűrők toppon
-	-lekért adatok megjelenítése
+	-lekért adatok megjelenítése diagrammon
 	-design
-- backend api állíthatósága
+	
+GIT :::
+-readme, license
+-action cron job
+-action commitra intel tesztel
+-tagre releast készít
 
 !!!!! TÖRÖLNI !!!!!
 BEFEJEZÉS:::
 Kommentek áttnézése
 DESC írása
+
+:::: Dokumentáció ::::
+
+ ToDo 
+ 
+ - index.php ban a manuális lekérést biztosító scriptet megírni
+	- kiválasztott ország és város szűrőkből kiolvasni a célt
+	- hívást indítani
+	- a hívást feltölteni
+	- megjeleníteni 
+
+ - git cron job setup
+	- https://www.youtube.com/watch?v=kh7piyS2XeE
+	
+ - php temprerature chart setup
+	- https://www.youtube.com/watch?v=j8XZADXinMY
+

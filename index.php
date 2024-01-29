@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="EN"  <!--xmlns="http://www.w3.org/1999/xhtml">-->
+
+<html lang="EN"  xmlns="http://www.w3.org/1999/xhtml"> <!-- utánna nézni -->
 	<head>
 		<?php include('controlls/config.php'); ?>
 		<?php include('views/layout/meta.php'); ?>
@@ -8,9 +9,9 @@
 	<body>
 		<div class="container-fluid">
 		<br>
-		kontnt
+		kontent
 		<br>
-			<?php // include('views/layout/top.php'); ?>
+			<?php include('views/layout/top.php'); ?>
 			<?php include('views/index.php'); ?>
 		</div>
 		<?php include('views/layout/js.php'); ?>

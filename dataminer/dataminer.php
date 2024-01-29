@@ -25,7 +25,7 @@ if ($versio == 'dev') {
     $db = 'idojaras';	
 }
 
-	$sleeptime = 1; //sleeptime változó egy perces késésre inicializálva.
+	$sleeptime = 1; //sleeptime változó egy másodperces késésre inicializálva.
 
 
 $connect = mysqli_connect($ip, $dbuser, $dbpass, $db);
@@ -38,60 +38,22 @@ mysqli_select_db($connect, $db) or die("nem lehet csatlakozni a dbhez");
 ///////     CONFIG       //////////
 
 
-// - - - FUNCTIONS - - -//// - - - FUNCTIONS - - -//// - - - FUNCTIONS - - -//
-// - - - FUNCTIONS - - -//// - - - FUNCTIONS - - -//// - - - FUNCTIONS - - -//
-// - - - FUNCTIONS - - -//// - - - FUNCTIONS - - -//// - - - FUNCTIONS - - -//
+// - - - FUNCTIONS - - -//
 
-/// Function for temperature data call ///
+//külső fileba szervezzük a használt fügvényeket, hogy felhasználhatóak legyenek más fileokban is
+//a szükségeseket itt húzzuk be
+include('../models/index.php');
+include('../models/dataminer.php');
 
-function call_tmep_data($api_url){
-	
-	$weather_data = json_decode(file_get_contents($api_url), true); //weather data tömb tartalmazza az összes lekért időjárás adatot az adott városra
-	
-	$temperature = $weather_data['main']['temp'];
-	
-	$celsius = $temperature - 273.15;
-	
-	return $celsius;
- }
- 
-/// Function for update new temp db ///
+// - - - FUNCTIONS - - -//
 
-function set_new_tmep($city_id, $city_temp){
-	global $connect;
-	
-	$query = "
-		INSERT INTO temperature (city_id,temperature) 
-		VALUES(
-		'".$city_id."','".$city_temp."'
-		)
-	";
-	// try catch
-	mysqli_query($connect, $query);	
-}
 
-/// Function for update scanned value ///
-
-function upd_scann($city_id, $scn_new, $scn_old) {
-	global $connect;
-		
-		$query = "
-			UPDATE cities SET scanned='".$scn_new."'
-			WHERE id='".$city_id."' 
-			OR scanned= '".$scn_old."'
-		";
-		
-		mysqli_query($connect, $query);		
-	}
-
-// - - - FUNCTIONS - - -//// - - - FUNCTIONS - - -//// - - - FUNCTIONS - - -//
-// - - - FUNCTIONS - - -//// - - - FUNCTIONS - - -//// - - - FUNCTIONS - - -//
-// - - - FUNCTIONS - - -//// - - - FUNCTIONS - - -//// - - - FUNCTIONS - - -//
 
 $scn_old = 3; // semleges értékre állítjuk a változót hogy az upd_scann fügvénybe ne zavarjon bele.
 $cancall = 1; // a do while ciklusnak engedélyt adunk a futásra
 do{
-	sleep($sleeptime);  //ezzel lehet lassitani a futasat alapértelmezetten 1percig
+	
+		sleep($sleeptime);  //ezzel lehet lassitani a futasat 1másodpercig ezzel adunk elég időt hogy minden adat biztosan megérkezzen.
 
 	$city_name = ""; // ini. A lekérdezni kívánt város nevének a változóját kiürítjük
 
@@ -107,7 +69,7 @@ do{
 				  LIMIT 1
 				";
 				
-	$city = array();	
+	$city = array(); // ini. ebben a tömben lesz benne az adatbázisból kért város adatai / ha van benne már adat itt kiürítjük
 		$sqlresult = mysqli_query($connect, $query);
 		if (!empty($sqlresult))
 			while ($row = mysqli_fetch_array($sqlresult)) {
@@ -121,29 +83,27 @@ do{
 			$scn_old = 2;
 			upd_scann($city_id, $scn_new, $scn_old);
 			$cancall = 0;
+			goto cycle_end; // nincs több scennelendő város ezért a ciklus végére ugrunk.
 		}
 
 	if(!empty($city))	{
 		$city_name = $city[0]['city'];
+			echo $city_name;
 		$city_id = $city[0]['id'];
+		
+		////////-----weather data call-----////////
+
+		$api_key = "b75d514fef8fb48881dc477e530935a6"; //api kulcs az időjárási adatokhoz (titkosítás!!!!!!!!!)
+		$api_url = "https://api.openweathermap.org/data/2.5/weather?q=".$city_name."&appid=".$api_key;
+
+		$city_temp = call_tmep_data($api_url);
+		 
+		////////-----weather data call-----////////	
 	}			
 	
 	//////   Query for next city   //////
 	//////   Query for next city   //////
-
-
-
-	////////-----weather data call-----////////
-	////////-----weather data call-----////////
-
-	$api_key = "b75d514fef8fb48881dc477e530935a6"; //api kulcs az időjárási adatokhoz (titkosítás!!!!!!!!!)
-	$api_url = "https://api.openweathermap.org/data/2.5/weather?q=".$city_name."&appid=".$api_key;
-
-	$city_temp = call_tmep_data($api_url);
-	 
-	////////-----weather data call-----////////
-	////////-----weather data call-----////////
-
+	
 
 
 	///// UPDATE the DB ///////
@@ -157,11 +117,13 @@ do{
 
 	///// UPDATE the DB ///////
 	///// UPDATE the DB ///////
- exit;
+	
+	
+	cycle_end : 1; // minden várost beszkenneltünk ezért a ciklus végére ugrunk.
+	// ToDo log file írása a sikeres scannelésről.
 
 
-
-}while ($cancall = 1); // addig fut amíg a cancall változó engedi /* 1call/sec free up to 1M call/moth */
+}while ($cancall == 1); // addig fut amíg a cancall változó engedi /* 1call/sec free up to 1M call/moth */
  file_put_contents('log.log', $log, FILE_APPEND);
  echo 'nincs több scannelendő város';
 ?>

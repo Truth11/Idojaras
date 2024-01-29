@@ -54,5 +54,5 @@
 
 	$self_url = 'http://127.0.0.1/webdev/Truth11.github.io/index.php';  // ??????????? ez jó????????
 	$domain = 'truth11.github.io';
-	$slogen = ' - Ultimate weather.';
+	$slogen = ' - Current weather.';
 ?>
