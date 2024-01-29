@@ -136,7 +136,7 @@ do{
 	////////-----weather data call-----////////
 	////////-----weather data call-----////////
 
-	$api_key = "b75d514fef8fb48881dc477e530935a6"; //beégetjük a kapott kulcsunkat egy változóba a későbbi egyszerűbb módosítás végett
+	$api_key = "b75d514fef8fb48881dc477e530935a6"; //api kulcs az időjárási adatokhoz (titkosítás!!!!!!!!!)
 	$api_url = "https://api.openweathermap.org/data/2.5/weather?q=".$city_name."&appid=".$api_key;
 
 	$city_temp = call_tmep_data($api_url);
