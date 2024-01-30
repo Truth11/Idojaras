@@ -75,20 +75,9 @@ do{
 			while ($row = mysqli_fetch_array($sqlresult)) {
 				$city[] = $row;
 			}
-		// ha elfogytak a scannelendő városok leállítjuk a scriptet 
-		// és reseteljük az autómatikus scannelést engedélyező adatbázis értékeket
-		if (empty($city)) {
-			$city_id = '';
-			$scn_new = 1;
-			$scn_old = 2;
-			upd_scann($city_id, $scn_new, $scn_old);
-			$cancall = 0;
-			goto cycle_end; // nincs több scennelendő város ezért a ciklus végére ugrunk.
-		}
-
-	if(!empty($city))	{
+		
+	if(!empty($city))	{ //ha sikerült adatot lekérni az adatbázisból megagyuk a lekért adatokat egy-egy változónak
 		$city_name = $city[0]['city'];
-			echo $city_name;
 		$city_id = $city[0]['id'];
 		
 		////////-----weather data call-----////////
@@ -109,18 +98,25 @@ do{
 	///// UPDATE the DB ///////
 	///// UPDATE the DB ///////
 
-	if (!empty($city_temp)){
+	if (!empty($city_temp)){ // ha sikerült az időjárás api-tól adatot kérnük feltöltjük az adatbázisunkba
 	set_new_tmep($city_id, $city_temp);
 	$scn_new = 2;
 	upd_scann($city_id, $scn_new, $scn_old);
+	$city_temp = ""; // city_temp változó kiürítése, hogy az újra ellenörzésnél új adat legyen benne.
 	}
 
 	///// UPDATE the DB ///////
 	///// UPDATE the DB ///////
 	
-	
-	cycle_end : 1; // minden várost beszkenneltünk ezért a ciklus végére ugrunk.
-	// ToDo log file írása a sikeres scannelésről.
+	// ha elfogytak a scannelendő városok leállítjuk a scriptet 
+	// és reseteljük az autómatikus scannelést engedélyező értékeket
+	if (empty($city)) {
+		$city_id = '';
+		$scn_new = 1;
+		$scn_old = 2;
+		upd_scann($city_id, $scn_new, $scn_old);
+		$cancall = 0;
+	}
 
 
 }while ($cancall == 1); // addig fut amíg a cancall változó engedi /* 1call/sec free up to 1M call/moth */

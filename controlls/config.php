@@ -24,7 +24,7 @@
 //---------el haslejuk a bemeno parametereket vege------------//
 	
 	
-	$versio = 'dev';  // verzio kapcsolo
+	$versio = 'de';  // verzio kapcsolo
 
 	if ($versio == 'dev') {
 		// fejlesztés
@@ -55,4 +55,6 @@
 	$self_url = 'http://127.0.0.1/webdev/Truth11.github.io/index.php';  // ??????????? ez jó????????
 	$domain = 'truth11.github.io';
 	$slogen = ' - Current weather.';
+	
+	$api_key = "b75d514fef8fb48881dc477e530935a6"; //api kulcs az időjárási adatokhoz (titkosítás!!!!!!!!!)
 ?>
