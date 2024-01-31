@@ -103,6 +103,7 @@ do{
 	$scn_new = 2;
 	upd_scann($city_id, $scn_new, $scn_old);
 	$city_temp = ""; // city_temp változó kiürítése, hogy az újra ellenörzésnél új adat legyen benne.
+	//file_put_contents('log.log', $log, FILE_APPEND); //logoljuk a sikeres 
 	}
 
 	///// UPDATE the DB ///////
@@ -120,6 +121,6 @@ do{
 
 
 }while ($cancall == 1); // addig fut amíg a cancall változó engedi /* 1call/sec free up to 1M call/moth */
- file_put_contents('log.log', $log, FILE_APPEND);
+ // file_put_contents('log.log', $log, FILE_APPEND);
  echo 'nincs több scannelendő város';
 ?>

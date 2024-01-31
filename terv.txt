@@ -43,7 +43,7 @@ BACKEND:::
 KINÉZET:::
 -layoutizació
 -index oldal
-	-szűrők
+	+szűrők
 találati oldal
 	-szűrők toppon
 	-lekért adatok megjelenítése diagrammon
@@ -55,24 +55,19 @@ GIT :::
 -action commitra intel tesztel
 -tagre releast készít
 
-!!!!! TÖRÖLNI !!!!!
-BEFEJEZÉS:::
-Kommentek áttnézése
-DESC írása
 
-:::: Dokumentáció ::::
+BEFEJEZÉS:::
+Kommentek áttnézése:
+
 
  ToDo 
  
- - index.php ban a manuális lekérést biztosító scriptet megírni
-	- kiválasztott ország és város szűrőkből kiolvasni a célt
-	- hívást indítani
-	- a hívást feltölteni
-	- megjeleníteni 
+ + index.php ban a manuális lekérést biztosító scriptet megírni
+	+ kiválasztott ország és város szűrőkből kiolvasni a célt
+	+ hívást indítani
+	+ a hívást feltölteni
+	+ megjeleníteni 
 
- - git cron job setup
-	- https://www.youtube.com/watch?v=kh7piyS2XeE
 	
  - php temprerature chart setup
-	- https://www.youtube.com/watch?v=j8XZADXinMY
 

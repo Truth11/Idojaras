@@ -27,3 +27,33 @@
 
 <!-- CSS only -->
 <link href="css/style.css" rel="stylesheet" >
+
+<!-- Chart -->
+<script>
+window.onload = function () {
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	title:{
+		text: "Temperature"
+	},
+	axisY: {
+		title: "",
+		valueFormatString: "#0,,.",
+		suffix: "°C",
+		prefix: ""
+	},
+	data: [{
+		type: "spline",
+		markerSize: 5,
+		xValueFormatString: "YYYY",
+		yValueFormatString: "$#,##0.##",
+		xValueType: "dateTime",
+		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+	}]
+});
+ 
+chart.render();
+ 
+}
+</script>
