@@ -2,7 +2,7 @@ name: Dataminer Cron
 
 on:
   schedule:
-    - cron: '*/10 * * * *'  # Minden 10. perc
+    - cron: '0 0 * * *'  # Minden 10. perc
 
 jobs:
   run_dataminer_job:
